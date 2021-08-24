@@ -1,5 +1,4 @@
 ﻿using Volo.Abp.MultiLingualObjects;
-using Volo.Abp.Threading;
 
 namespace AutoMapper
 {
