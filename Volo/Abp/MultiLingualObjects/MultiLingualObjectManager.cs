@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
 
@@ -57,6 +58,13 @@ namespace Volo.Abp.MultiLingualObjects
 
             translation = multiLingual.Translations.FirstOrDefault();
             return translation;
+        }
+
+        public virtual Task<TTranslation> GetTranslationAsync<TMultiLingual, TTranslation>(TMultiLingual multiLingual,
+            string culture = null,
+            bool fallbackToParentCultures = true) where TMultiLingual : IHasMultiLingual<TTranslation> where TTranslation : class, IMultiLingualTranslation
+        {
+            return Task.FromResult(GetTranslation<TMultiLingual, TTranslation>(multiLingual, culture, fallbackToParentCultures));
         }
 
         protected virtual TTranslation GetTranslationBasedOnCulturalRecursive<TTranslation>(
